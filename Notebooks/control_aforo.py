@@ -73,3 +73,52 @@ Otros casos para probar:
 
 
 # Desarrolle su solución a partir de esta línea.
+CAPACIDAD_MAXIMA = 700
+grupos_aceptados = []
+grupos_rechazados = []
+ocupacion_actual = 0
+entrada = 0
+print("---CONTROL---INGRESO---CENAC---")
+print("Capacidad maxima: 700 personas")
+print("Escriba fin para finalizar el programa: \n")
+
+
+
+while entrada != "fin":
+  entrada = input("\nCapacidad de personas a ingresar: ").lower().strip()
+  try: 
+    cantidad_grupo = int(entrada)
+    if cantidad_grupo<=0:
+      print("Digite un numero entero diferente a 0 y que no sea negativo o poner 'fin'")
+    elif cantidad_grupo + ocupacion_actual <= CAPACIDAD_MAXIMA:
+      ocupacion_actual += cantidad_grupo
+      grupos_aceptados.append(cantidad_grupo)
+      print(f"Grupo aceptado: ingresan {cantidad_grupo} de personas")
+
+    else:
+      grupos_rechazados.append(cantidad_grupo)
+      print(f"Su grupo ha sido rechazado, no hay espacio disponible para {cantidad_grupo} de personas")
+    print(f"Ocupacion actual: {ocupacion_actual}")
+    print(f"Espacios disponibles: {CAPACIDAD_MAXIMA - ocupacion_actual}")
+
+  except ValueError:
+    if entrada == "fin":
+      print("Saliendo del sistema")
+    else:
+      print("Entrada invalida")
+print(f"Cantidad de grupos aceptados: {grupos_aceptados}")
+print(f"Cantidad de grupos rechazados: {grupos_rechazados}")
+print(f"Espacios disponibles: {CAPACIDAD_MAXIMA - ocupacion_actual}")
+print(f"Ocupacion actual: {ocupacion_actual}")
+print(f"Capacidad maxima: {CAPACIDAD_MAXIMA}")
+porcentaje_ocupacion = (ocupacion_actual/CAPACIDAD_MAXIMA) * 100
+print(f"El porcentaje de ocupacion es de: {porcentaje_ocupacion}")
+print(f"Grupo mas pequeño aceptado: {min(grupos_aceptados)} personas")
+print(f"Grupo mas grande aceptado: {max(grupos_aceptados)} personas")
+
+if ocupacion_actual >= 700:
+  print("capacidad completa")
+elif ocupacion_actual >= 560:
+  print("capacidad preventiva")
+else: 
+  print("Capacidad normal")
